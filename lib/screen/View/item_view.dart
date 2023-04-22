@@ -57,76 +57,40 @@ class _Item_ScreenState extends State<Item_Screen> {
             )
           ],
         ),
-        backgroundColor: Colors.green,
-        // body: GridView.builder(
-        //     gridDelegate:
-        //         SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        //     itemBuilder: (context, index) {
-        //       return watchpair();
-        //     },itemCount: providerF!.itemList.length,),
-        body: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2), itemBuilder: (context, index) {
-          return Container(
-            height: 50,
-            color: Colors.grey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset("${providerF!.itemList[index].image}",height: 80,width: 50,),
-                Text("${providerF!.itemList[index].name}",style: TextStyle(fontSize: 10),),
-                Text("${providerF!.itemList[index].name}",style: TextStyle(fontSize: 10),),
-              ],
-            ),
-          );
-        },itemCount: providerF!.itemList.length,)
+
+          body: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+
+          ), itemBuilder:(context, index) {
+            return data(index);
+          },itemCount: providerF!.itemList.length,)
       ),
     );
   }
 
-  Widget watchpair() {
-    return Container(
-      height: 150,
-      width: 100,
-      color: Colors.white,
-      child: ListView.builder(itemBuilder: (context, index) {
-        return Row(
-          mainAxisSize: MainAxisSize.min,
+  Widget data(int index)
+  {
+    return InkWell(onTap: () {
+
+      Navigator.pushNamed(context, 'item detali',arguments: index);
+    },
+      child: Container(
+        height: 70,
+        width: 60,
+        margin: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+        ),
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset("assets/image/m1.jpg"),
-            SizedBox(width: 10),
-            Image.asset("assets/image/m2.jpg"),
-            SizedBox(width: 10),
-            Image.asset("assets/image/m3.jpg"),
-            SizedBox(width: 10),
-
-            Image.asset("assets/image/43.jpg"),
-            SizedBox(width: 10),
+            Image.asset("${providerF!.itemList[index].image}",height: 80,),
+            Text(" ${providerF!.itemList[index].name}",style: TextStyle(fontSize: 10,color: Colors.black54),),
+            Text("₹ ${providerF!.itemList[index].price}",style: TextStyle(fontSize: 10,color: Colors.black),),
           ],
-        );
-      }, itemCount: 3,),
-    );
-  }
 
-  Widget watch() {
-    return Container(
-      height: 200,
-      width: 200,
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2
-        ), itemBuilder: (context, index) {
-        return Container(
-          height: 200,
-          width: 200,
-          child: Column(
-            children: [
-              Image.asset("${providerF!.itemList[index].image}"),
-              Text("${providerF!.itemList[index].name}"),
-              // Image.asset("assets/image/m1.jpg"),
-
-            ],
-          ),
-        );
-      }, itemCount: providerF!.itemList.length,),
+        ),
+      ),
     );
   }
 }
